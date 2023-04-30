@@ -1,7 +1,7 @@
 package main
 
 import (
-	"net/http"
+	"jwt-auth/controllers"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,9 +14,7 @@ func main() {
 
 	public := r.Group("/api")
 
-	public.POST("/register", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"data": "this is the register endpoint!"})
-	})
+	public.POST("/register", controllers.Register)
 
 	r.Run(":8080")
 }
