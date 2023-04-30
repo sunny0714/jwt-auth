@@ -3,6 +3,7 @@ package main
 import (
 	"jwt-auth/controllers"
 	"jwt-auth/models"
+	"log"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,6 +19,8 @@ func main() {
 	public := r.Group("/api")
 
 	public.POST("/register", controllers.Register)
+	public.POST("/login", controllers.Login)
 
+	log.Println("Server started on: ", "http://127.0.0.1:8080")
 	r.Run(":8080")
 }
