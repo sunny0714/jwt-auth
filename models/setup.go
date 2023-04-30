@@ -31,7 +31,7 @@ func ConnectDataBase() {
 	DB, err = gorm.Open(mysql.Open(DBURL), &gorm.Config{})
 
 	if err != nil {
-		fmt.Println("Cannot connect to database ", Dbdriver)
+		fmt.Println("Cannot connect to database", Dbdriver)
 		log.Fatal("connection error: ", err)
 	}
 

@@ -2,6 +2,7 @@ package main
 
 import (
 	"jwt-auth/controllers"
+	"jwt-auth/models"
 
 	"github.com/gin-gonic/gin"
 )
@@ -9,6 +10,8 @@ import (
 func main() {
 	// turn off debug mode
 	gin.SetMode(gin.ReleaseMode)
+
+	models.ConnectDataBase()
 
 	r := gin.Default()
 
