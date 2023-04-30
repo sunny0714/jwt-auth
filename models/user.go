@@ -20,7 +20,7 @@ func (u *User) SaveUser() (*User, error) {
 	return u, nil
 }
 
-func (u *User) BeforeSave() (err error) {
+func (u *User) BeforeSave(*gorm.DB) (err error) {
 	// turn password into hash
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.DefaultCost)
 	if err != nil {
