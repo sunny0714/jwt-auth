@@ -1,6 +1,7 @@
 package models
 
 import (
+	"errors"
 	"jwt-auth/utils/token"
 
 	"golang.org/x/crypto/bcrypt"
@@ -11,6 +12,23 @@ type User struct {
 	gorm.Model
 	Username string `gorm:"size:255;not null;unique" json:"username"`
 	Password string `gorm:"size:255;not null;" json:"password"`
+}
+
+func GetUserByID(uid uint) (User, error) {
+	var u User
+
+	if err := DB.First(&u, uid).Error; err != nil {
+		return u, errors.New("User not found!")
+	}
+
+	u.PrepareGive()
+
+	return u, nil
+}
+
+// remove the hashed password string before returing it for security purposes
+func (u *User) PrepareGive() {
+	u.Password = ""
 }
 
 func VerifyPassoword(password, hashedPassword string) error {
